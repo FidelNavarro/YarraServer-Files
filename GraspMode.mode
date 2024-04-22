@@ -1,0 +1,45 @@
+;##  YarraServer -- Reconstruction Mode Definition
+;##
+
+[ClientConfig]
+SortIndex=10
+Name=GRASP Recon
+Tag=_YR
+RequiresACC=TRUE
+RequiresAdjScans=TRUE
+ConfirmationMail=fnav0118@uni.sydney.edu.au
+
+[Options]
+KeepRawdata=false
+
+[PreProcessing]
+Bin1=%bd/IniPatch
+Args1=%mc %bu/GRASP/default.ini %rid/settings.ini %vparam
+
+[IniPatch]
+PatchKey1=Preprocessing/SpokesPerFrame1
+PatchKey2=Preprocessing/SlidingWindowSize
+PatchKey3=Preprocessing/SpokesPerTimestep
+
+[Reconstruction]
+Bin=%bu/GRASP/GraspR
+Args=%rid/%rif %rid/settings.ini %rod %tmp %vacc
+
+[PostProcessing]
+
+[Transfer]
+Bin=%bd/DriveTransfer
+Args=%mc %td %vuid
+
+[DriveTransfer]
+TargetPath=/home/yarraserver/yarra/myRDS
+
+;## [Transfer]
+;## Bin=%bd/PACSTransfer
+;## Args=%mc %td
+
+;## [PACSTransfer]
+;## AEC=[Put AEC of PACS]
+;## IP=[Put IP of PACS]
+;## Port=[Put port of PACS]
+;## AET=[Put AET for PACS, e.g. GRASP]
